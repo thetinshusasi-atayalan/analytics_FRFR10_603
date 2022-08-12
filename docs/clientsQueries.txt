@@ -1,0 +1,7 @@
+GetClientsUsage
+SELECT SUM("bytesToClient") AS bytesIn, SUM("bytesFromClient") AS bytesOut FROM "usage" WHERE time > now()- <timeRange>h  GROUP BY "clientId" , "clientType"
+
+
+GetClientsUsageByClientId
+ SELECT SUM("bytesToClient") AS bytesIn, SUM("bytesFromClient") AS bytesOut FROM "usage" WHERE  time > now()-<timeRange>h  AND "clientId" = '<clientId>' GROUP BY "clientType"
+

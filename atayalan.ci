@@ -1,0 +1,7 @@
+@Library('atayalan-ci') _
+ci {
+     lang "go"
+     requires "go", cmd: "cat", image: "go:1.17.8-10"
+     envVars  "GOPATH" : "/go"
+     stage "intg", enabled: "false"
+}

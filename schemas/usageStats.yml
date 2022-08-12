@@ -1,0 +1,100 @@
+openapi: 3.0.1
+info:
+  title: usage statistics
+  description: API for getting usage statistics  
+  version: v1
+servers:
+  - url: https://www.atayalan.com/api/v1.1.0
+paths:
+  /usage/clients/:
+    get:
+      parameters:
+        - name: range
+          in: query
+          description: time range for query in hours
+          schema: 
+            type: number
+          required: true
+          example: 1.5
+      summary: Get usage statistics for clients
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clientsUsage'
+  /usage/clients/{clientId}:
+    get:
+      parameters:
+        - name: clientId
+          in: path
+          description: client identifier IMSI or MAC
+          schema:
+            type: string
+          example: "1234567890123"
+          required: true
+        - name: range
+          in: query
+          description: time range for query in hours
+          schema: 
+            type: number
+          required: true
+          example: 1.5
+      summary: Get usage statistics for clients
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/clientUsage'
+  /usage/dnns/:
+    get:
+      summary: Get usage statistics for dnn
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/dnnsUsage'
+components:
+  schemas:
+    clientUsage:
+      type: object
+      properties:
+        clientId: 
+          type: string
+          example: "1234567801256"
+        clientType:
+          type: string
+          enum: 
+            - 5G
+            - Wlan
+        bytesIn:
+          type: integer
+          example: 10364
+        bytesOut:
+          type: integer
+          example: 1024566
+    clientsUsage:
+      type: array
+      items:
+        $ref: "#/components/schemas/clientUsage"
+    dnnUsage:
+      type: object
+      properties:
+        dnnName: 
+          type: string
+          example: "default-dnn"
+        bytesIn:
+          type: integer
+          example: 10364
+        bytesOut:
+          type: integer
+          example: 1024566
+    dnnsUsage:
+      type: array
+      items:
+        $ref: "#/components/schemas/dnnUsage"

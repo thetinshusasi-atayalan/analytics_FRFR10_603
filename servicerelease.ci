@@ -1,0 +1,5 @@
+@Library('atayalan-ci') _
+servicerelease {
+    service = "analytics"
+    chartgen = false
+}

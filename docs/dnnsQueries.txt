@@ -1,0 +1,2 @@
+ GetDnnUsage
+ SELECT SUM("bytesToClient") AS bytesIn, SUM("bytesFromClient") AS bytesOut FROM "usage" WHERE time > now()- <timeRange>h  GROUP BY "dnn"
